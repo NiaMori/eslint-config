@@ -1,0 +1,26 @@
+{
+  "name": "@niamori/eslint-config",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "NiaMori's ESLint config",
+  "author": "NiaMori <Hellc5261@gmail.com> (https://github.com/niamori/)",
+  "license": "MIT",
+  "homepage": "https://github.com/niamori/eslint-config",
+  "keywords": [
+    "eslint-config"
+  ],
+  "main": "index.cjs",
+  "files": [
+    "index.cjs"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.4.0"
+  },
+  "dependencies": {
+    "@antfu/eslint-config-react": "^0.39.7",
+    "@rushstack/eslint-patch": "^1.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0"
+  }
+}
