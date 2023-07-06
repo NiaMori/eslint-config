@@ -19,7 +19,7 @@ module.exports = {
     'react/jsx-indent-props': ['error', 2],
     'react/jsx-no-leaked-render': 'error',
     'react/jsx-sort-props': ['error', { callbacksLast: true, shorthandFirst: true, reservedFirst: true }],
-    'react/jsx-space-before-closing': ['error', 'always'],
+    'react/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
     'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
 
     'react/destructuring-assignment': ['error', 'always'],
