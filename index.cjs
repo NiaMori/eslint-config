@@ -24,5 +24,11 @@ module.exports = {
 
     'react/destructuring-assignment': ['error', 'always'],
     'react/hook-use-state': ['error', { allowDestructuredState: true }],
+
+    /**
+     * many dual packages now has [Masquerading as CJS](https://github.com/arethetypeswrong/arethetypeswrong.github.io/blob/main/docs/problems/FalseCJS.md) issues
+     * we have to use `import foo = require('bar')` to use the cjs version as a workaround
+     */
+    '@typescript-eslint/no-require-imports': 'off',
   },
 }
