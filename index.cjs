@@ -30,5 +30,7 @@ module.exports = {
      * we have to use `import foo = require('bar')` to use the cjs version as a workaround
      */
     '@typescript-eslint/no-require-imports': 'off',
+
+    'n/prefer-global/process': 'off',
   },
 }
