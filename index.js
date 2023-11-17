@@ -104,7 +104,7 @@ module.exports.pleaseConfigESLintForMe = () => {
     },
 
     {
-      name: 'niamori:preferences:tsconfgi',
+      name: 'niamori:preferences:tsconfig',
 
       files: ['tsconfig.json'],
 
