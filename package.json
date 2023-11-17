@@ -19,7 +19,8 @@
     "release": "pnpm run bump && npm publish"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^1.1.2"
+    "@antfu/eslint-config": "^1.1.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.7",

@@ -1,4 +1,6 @@
+const fs = require('node:fs')
 const { antfu, pluginAntfu, pluginJsonc, pluginNode, pluginStylistic, pluginTs } = require('@antfu/eslint-config')
+const z = require('zod')
 
 module.exports.pleaseConfigESLintForMe = () => {
   /**
@@ -16,11 +18,21 @@ module.exports.pleaseConfigESLintForMe = () => {
   /**
    * @type {import('@antfu/eslint-config').ConfigItem[]}
    */
-  const myConfigs = [
-    {
-      ignores: ['eslint.config.js'],
-    },
+  const myConfigs = []
 
+  const tsconfig = z.object({
+    compilerOptions: z.object({
+      allowJs: z.boolean().default(false),
+    }).optional(),
+  }).parse(JSON.parse(fs.readFileSync('tsconfig.json', 'utf8')))
+
+  if (!tsconfig?.compilerOptions?.allowJs) {
+    myConfigs.push({
+      ignores: ['**/*.js', '**/*.cjs'],
+    })
+  }
+
+  myConfigs.push(
     {
       name: 'niamori:preferences:stylistic',
 
@@ -104,7 +116,7 @@ module.exports.pleaseConfigESLintForMe = () => {
         'jsonc/sort-keys': 'off',
       },
     },
-  ]
+  )
 
   return [...antfuConfigs, ...myConfigs]
 }
