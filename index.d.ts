@@ -1,3 +1,3 @@
 import type { ConfigItem } from '@antfu/eslint-config'
 
-declare function pleaseConfigESLintForMe(): ConfigItem[]
+declare function pleaseConfigESLintForMe(): Promise<ConfigItem[]>
