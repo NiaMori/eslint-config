@@ -1,8 +1,8 @@
-const fs = require('node:fs')
-const { antfu, pluginAntfu, pluginJsonc, pluginNode, pluginStylistic, pluginTs } = require('@antfu/eslint-config')
-const z = require('zod')
+import { readFileSync } from 'node:fs'
+import { antfu, pluginAntfu, pluginJsonc, pluginNode, pluginStylistic, pluginTs } from '@antfu/eslint-config'
+import { object, boolean } from 'zod'
 
-module.exports.pleaseConfigESLintForMe = () => {
+export function pleaseConfigESLintForMe() {
   /**
    * @type {import('@antfu/eslint-config').OptionsConfig}
    */
@@ -20,11 +20,11 @@ module.exports.pleaseConfigESLintForMe = () => {
    */
   const myConfigs = []
 
-  const tsconfig = z.object({
-    compilerOptions: z.object({
-      allowJs: z.boolean().default(false),
+  const tsconfig = object({
+    compilerOptions: object({
+      allowJs: boolean().default(false),
     }).optional(),
-  }).parse(JSON.parse(fs.readFileSync('tsconfig.json', 'utf8')))
+  }).parse(JSON.parse(readFileSync('tsconfig.json', 'utf8')))
 
   if (!tsconfig?.compilerOptions?.allowJs) {
     myConfigs.push({

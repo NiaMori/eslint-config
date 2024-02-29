@@ -1,6 +1,6 @@
 {
   "name": "@niamori/eslint-config",
-  "type": "commonjs",
+  "type": "module",
   "version": "0.1.1",
   "description": "NiaMori's ESLint config",
   "author": "NiaMori <Hellc5261@gmail.com> (https://github.com/niamori/)",

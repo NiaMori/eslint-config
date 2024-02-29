@@ -1,3 +1,3 @@
-const { pleaseConfigESLintForMe } = require('./index.js')
+import { pleaseConfigESLintForMe } from './index.js'
 
-module.exports = pleaseConfigESLintForMe()
+export default pleaseConfigESLintForMe()
