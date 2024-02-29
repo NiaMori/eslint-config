@@ -19,16 +19,25 @@
     "release": "pnpm run bump && npm publish"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^1.1.2",
+    "@antfu/eslint-config": "^2.6.4",
+    "@stylistic/eslint-plugin": "^1.6.2",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "eslint-plugin-antfu": "^2.1.2",
+    "eslint-plugin-jsonc": "^2.13.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "jsonc-eslint-parser": "^2.4.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.7",
-    "@types/node": "^20.9.0",
-    "bumpp": "^9.2.0",
-    "eslint": "^8.53.0",
-    "eslint-flat-config-viewer": "^0.1.1",
-    "typescript": "^5.2.2"
+    "@types/eslint": "^8.56.5",
+    "@types/node": "^20.11.22",
+    "bumpp": "^9.3.0",
+    "eslint": "^8.57.0",
+    "eslint-flat-config-viewer": "^0.1.11",
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

@@ -1,8 +1,15 @@
-import { readFileSync } from 'node:fs'
-import { antfu, pluginAntfu, pluginJsonc, pluginNode, pluginStylistic, pluginTs } from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config'
+import fs from 'node:fs'
 import { object, boolean } from 'zod'
 
-export function pleaseConfigESLintForMe() {
+import pluginAntfu from 'eslint-plugin-antfu'
+import pluginTs from '@typescript-eslint/eslint-plugin'
+import pluginStylistic from '@stylistic/eslint-plugin'
+import pluginJsonc from 'eslint-plugin-jsonc'
+// @ts-expect-error eslint-plugin-no doesn't have types
+import pluginNode from 'eslint-plugin-n'
+
+export async function pleaseConfigESLintForMe() {
   /**
    * @type {import('@antfu/eslint-config').OptionsConfig}
    */
@@ -11,12 +18,13 @@ export function pleaseConfigESLintForMe() {
     typescript: {
       tsconfigPath: 'tsconfig.json',
     },
+    react: true
   }
 
-  const antfuConfigs = antfu(antfuOptions)
+  const antfuConfigs = await antfu(antfuOptions)
 
   /**
-   * @type {import('@antfu/eslint-config').ConfigItem[]}
+   * @type {import('@antfu/eslint-config').FlatConfigItem[]}
    */
   const myConfigs = []
 
@@ -24,7 +32,7 @@ export function pleaseConfigESLintForMe() {
     compilerOptions: object({
       allowJs: boolean().default(false),
     }).optional(),
-  }).parse(JSON.parse(readFileSync('tsconfig.json', 'utf8')))
+  }).parse(JSON.parse(await fs.promises.readFile('tsconfig.json', 'utf8')))
 
   if (!tsconfig?.compilerOptions?.allowJs) {
     myConfigs.push({
