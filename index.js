@@ -87,6 +87,29 @@ async function reactConfigs() {
   ]
 }
 
+/**
+ * @type {() => Promise<import('@antfu/eslint-config').FlatConfigItem[]>}
+ */
+async function nextConfigs() {
+  // @ts-expect-error eslint-plugin-next doesn't have types
+  const pluginNext = await import('@next/eslint-plugin-next').then(it => it.default || it)
+
+  return [
+    {
+      name: 'niamori:next',
+      files: ['**/*.?([cm])jsx', '**/*.?([cm])tsx'],
+      plugins: {
+        '@next/next': pluginNext,
+      },
+      rules: {
+        ...pluginNext.configs.recommended.rules,
+        ...pluginNext.configs['core-web-vitals'].rules,
+        '@next/next/no-img-element': 'error',
+      },
+    },
+  ]
+}
+
 export async function pleaseConfigESLintForMe() {
   /**
    * @type {import('@antfu/eslint-config').OptionsConfig}
@@ -143,6 +166,10 @@ export async function pleaseConfigESLintForMe() {
 
   if (isPackageExists('react')) {
     myConfigs.push(...await reactConfigs())
+  }
+
+  if (isPackageExists('next')) {
+    myConfigs.push(...await nextConfigs())
   }
 
   myConfigs.push(
