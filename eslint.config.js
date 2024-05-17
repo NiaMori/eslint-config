@@ -1,3 +1,3 @@
-import { pleaseConfigESLintForMe } from './index.js'
+import { pleaseConfigESLintForMe } from './dist/esm/src/index.js'
 
 export default pleaseConfigESLintForMe()
