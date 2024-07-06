@@ -89,6 +89,9 @@ export function pleaseConfigESLintForMe(): Linter.FlatConfig[] {
       'n/prefer-global/process': ['error', 'always'],
       'n/prefer-global/buffer': ['error', 'always'],
       'n/no-missing-import': 'off',
+      'n/no-unsupported-features/node-builtins': ['warn', {
+        allowExperimental: true,
+      }],
     }),
 
     reco('eslint-plugin-unused-imports'),
