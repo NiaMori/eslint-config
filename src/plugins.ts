@@ -93,6 +93,7 @@ export const pluginRegstry = {
   '@next/eslint-plugin-next': await sugar(async () => {
     const plugin = await import('@next/eslint-plugin-next')
       .then(m => m.default)
+      // @ts-expect-error @next/eslint-plugin-next is not compat with the new eslint
       .then(plugin => fixupPluginRules(plugin) as typeof plugin)
 
     const isUsingNext = await isPackageListed('next')
@@ -144,7 +145,10 @@ export const pluginRegstry = {
   }),
 
   'eslint-plugin-react-hooks': await sugar(async () => {
-    const plugin = await import('eslint-plugin-react-hooks').then(m => m.default)
+    const plugin = await import('eslint-plugin-react-hooks')
+      .then(m => m.default)
+      // @ts-expect-error @next/eslint-plugin-react-hooks is not compat with the new eslint
+      .then(plugin => fixupPluginRules(plugin) as typeof plugin)
 
     const isUsingReact = await isPackageListed('react')
 
