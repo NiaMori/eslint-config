@@ -50,6 +50,10 @@
       "dev:@niamori/eslint-config": "./src/*.js",
       "import": "./dist/esm/src/*.js",
       "require": "./dist/esm/src/*.js"
+    },
+    "./stubs/*": {
+      "import": "./src/stubs/*.js",
+      "require": "./src/stubs/*.js"
     }
   },
   "main": "./dist/esm/src/index.js",
@@ -63,7 +67,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "src/stubs"
   ],
   "scripts": {
     "build": "rollup --config rollup.config.js",
