@@ -7,7 +7,7 @@ import pluginESLintJs from '@eslint/js'
 import { isPackageListed } from 'local-pkg'
 import { fixupPluginRules } from '@eslint/compat'
 
-async function sugar<RuleOptions>(fn: () => Promise<{ name: string, plugin: unknown, plugins: unknown, recommended: unknown, RuleOptions: RuleOptions }>): Promise<{
+async function sugar<RuleOptions>(fn: () => Promise<{ name: string, plugin: unknown, plugins: unknown, recommended?: Record<string, unknown> | undefined, RuleOptions: RuleOptions }>): Promise<{
   name: string
   plugin: ESLint.Plugin
   plugins: Record<string, ESLint.Plugin>
@@ -34,11 +34,13 @@ async function sugar<RuleOptions>(fn: () => Promise<{ name: string, plugin: unkn
   assert(recommended && typeof recommended === 'object', 'recommended must be an object')
   assert(Object.keys(recommended).every(key => typeof key === 'string' && (key.startsWith(scope) || !key.includes('/'))), 'recommended must have only scoped keys')
 
+  const validRecommended = Object.fromEntries(Object.entries(recommended).filter(([, v]) => !v))
+
   return {
     name,
     plugin,
     plugins,
-    recommended,
+    recommended: validRecommended,
     typegen: async () => {
       const dts = await pluginsToRulesDTS({ [scope]: plugin })
       const dtsPath = `src/stubs/${name}.d.ts`
@@ -48,7 +50,7 @@ async function sugar<RuleOptions>(fn: () => Promise<{ name: string, plugin: unkn
     flat: {
       name: `reco:${name}`,
       plugins,
-      rules: recommended,
+      rules: validRecommended,
     },
   } as {
     name: string
