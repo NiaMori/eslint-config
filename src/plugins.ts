@@ -34,7 +34,7 @@ async function sugar<RuleOptions>(fn: () => Promise<{ name: string, plugin: unkn
   assert(recommended && typeof recommended === 'object', 'recommended must be an object')
   assert(Object.keys(recommended).every(key => typeof key === 'string' && (key.startsWith(scope) || !key.includes('/'))), 'recommended must have only scoped keys')
 
-  const validRecommended = Object.fromEntries(Object.entries(recommended).filter(([, v]) => !v))
+  const validRecommended = Object.fromEntries(Object.entries(recommended).filter(([, v]) => v !== undefined))
 
   return {
     name,
