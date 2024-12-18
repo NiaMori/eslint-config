@@ -95,7 +95,6 @@ export const pluginRegstry = {
   '@next/eslint-plugin-next': await sugar(async () => {
     const plugin = await import('@next/eslint-plugin-next')
       .then(m => m.default)
-      // @ts-expect-error @next/eslint-plugin-next is not compat with the new eslint
       .then(plugin => fixupPluginRules(plugin) as typeof plugin)
 
     const isUsingNext = await isPackageListed('next')
@@ -125,9 +124,7 @@ export const pluginRegstry = {
       plugins: { '@eslint-react': plugin },
       recommended: isUsingReact
         ? {
-            ...plugin.configs?.recommended?.rules,
-            ...plugin.configs?.['off-dom'].rules,
-            '@eslint-react/dom/no-render-return-value': 'off',
+            ...plugin.configs?.['core']?.rules,
           }
         : {},
       RuleOptions: 0 as import('@niamori/eslint-config/stubs/@eslint-react/eslint-plugin').RuleOptions,
@@ -149,7 +146,6 @@ export const pluginRegstry = {
   'eslint-plugin-react-hooks': await sugar(async () => {
     const plugin = await import('eslint-plugin-react-hooks')
       .then(m => m.default)
-      // @ts-expect-error @next/eslint-plugin-react-hooks is not compat with the new eslint
       .then(plugin => fixupPluginRules(plugin) as typeof plugin)
 
     const isUsingReact = await isPackageListed('react')
@@ -185,7 +181,7 @@ export const pluginRegstry = {
       plugin,
       plugins: { jsdoc: plugin },
       recommended: Object.fromEntries(
-        Object.entries(plugin.configs['recommended-typescript'].rules ?? '')
+        Object.entries(plugin.configs['flat/recommended-typescript'].rules ?? '')
           .filter(([key]) => !key.startsWith('jsdoc/require')),
       ),
       RuleOptions: 0 as import('@niamori/eslint-config/stubs/eslint-plugin-jsdoc').RuleOptions,
