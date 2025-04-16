@@ -2,7 +2,7 @@ import { GLOB_EXCLUDE, GLOB_JS, GLOB_TS, GLOB_TSX } from '@antfu/eslint-config'
 import type { Linter } from 'eslint'
 import gitignore from 'eslint-config-flat-gitignore'
 import parserTypeScript from '@typescript-eslint/parser'
-import { reco, over } from '@niamori/eslint-config/plugins'
+import { reco, over, disb } from '@niamori/eslint-config/plugins'
 import globals from 'globals'
 import { match } from 'ts-pattern'
 
@@ -13,7 +13,7 @@ function igno(ignores: string[], name: string = 'mannual') {
   }
 }
 
-function pars(target: 'ts' | 'tsx', languageOptions: Linter.FlatConfig['languageOptions']): Linter.FlatConfig {
+function pars(target: 'ts' | 'tsx', languageOptions: Linter.Config['languageOptions']): Linter.Config {
   return {
     name: `pars:${target}`,
     files: match(target)
@@ -27,14 +27,15 @@ export function configESLint(fn: (props: {
   reco: typeof reco
   over: typeof over
   igno: typeof igno
-}) => Linter.FlatConfig[]): Linter.FlatConfig[] {
+  disb: typeof disb
+}) => Linter.Config[]): Linter.Config[] {
   return [
     ...pleaseConfigESLintForMe(),
-    ...fn({ reco, over, igno }),
+    ...fn({ reco, over, igno, disb }),
   ]
 }
 
-export function pleaseConfigESLintForMe(): Linter.FlatConfig[] {
+export function pleaseConfigESLintForMe(): Linter.Config[] {
   return [
     igno(GLOB_EXCLUDE, 'exclude'),
     igno(gitignore().ignores, 'gitignore'),

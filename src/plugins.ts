@@ -200,9 +200,9 @@ export const reco = (name: keyof typeof pluginRegstry | '@eslint/js') => {
   return pluginRegstry[name].flat
 }
 
-export function over(name: '@eslint/js', rules: Linter.RulesRecord): Linter.FlatConfig
-export function over<Name extends keyof typeof pluginRegstry>(name: Name, rules: typeof pluginRegstry[Name]['RuleOptions']): Linter.FlatConfig
-export function over(name: string, rules: Linter.RulesRecord): Linter.FlatConfig {
+export function over(name: '@eslint/js', rules: Linter.RulesRecord): Linter.Config
+export function over<Name extends keyof typeof pluginRegstry>(name: Name, rules: typeof pluginRegstry[Name]['RuleOptions']): Linter.Config
+export function over(name: string, rules: Linter.RulesRecord): Linter.Config {
   if (name === '@eslint/js') {
     return {
       name: 'over:@eslint/js',
@@ -214,5 +214,15 @@ export function over(name: string, rules: Linter.RulesRecord): Linter.FlatConfig
     name: `over:${name}`,
     plugins: pluginRegstry[name as keyof typeof pluginRegstry].plugins,
     rules: rules as Linter.RulesRecord,
+  }
+}
+
+export function disb<Name extends keyof typeof pluginRegstry>(name: Name): Linter.Config {
+  return {
+    name: `disb:${name}`,
+    plugins: pluginRegstry[name].plugins,
+    rules: Object.fromEntries(
+      Object.entries(pluginRegstry[name].recommended).map(([key]) => [key, 'off']),
+    ) as Linter.RulesRecord,
   }
 }
