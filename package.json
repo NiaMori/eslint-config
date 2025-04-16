@@ -1,7 +1,7 @@
 {
   "name": "@niamori/eslint-config",
   "type": "module",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "NiaMori's ESLint config",
   "author": "NiaMori <Hellc5261@gmail.com> (https://github.com/niamori)",
   "license": "MIT",
